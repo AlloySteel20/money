@@ -2,7 +2,7 @@
 Тестовое задание
 Приложение "Калькулятор отпускных".
 Микросервис на SpringBoot + Java 11 c одним API:
-GET "/calculacte"
+GET "/calculate"
 
 
 
@@ -16,6 +16,6 @@ GET "/calculacte"
 Run MoneyApplication.main()
 http://localhost:8080/calculate?averageSalary=100000&startDay=2022-10-04&daysRequest=14
 параметры запроса:
-averageSalary - средняя месячнаяя за год;
+averageSalary - средняя месячная за год;
 startDay - с какого дня отпуск;
 daysRequest - на сколько дней работник собрался в отпуск;
