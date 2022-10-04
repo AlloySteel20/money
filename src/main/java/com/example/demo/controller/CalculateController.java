@@ -13,14 +13,16 @@ import static java.lang.Integer.parseInt;
 
 @RestController
 public class CalculateController {
+    final  double AVERAGE_MONTH_DAYS_IN_YEAR = 29.3;
+
     @GetMapping("/calculate")
     public String calculate(HttpServletRequest request){
         try {
-            String averageSalary = request.getParameter("averageSalary");
-            String dateRequest = request.getParameter("dateRequest");
-            String daysRequest = request.getParameter("daysRequest");
-            int days = DateUtil.GetWorkingDays(LocalDate.parse(dateRequest), parseInt(daysRequest));
-            return String.format("%.2f",(parseDouble(averageSalary)/29.3) * days);
+            double averageSalary = parseDouble(request.getParameter("averageSalary"));
+            LocalDate dateRequest = LocalDate.parse(request.getParameter("dateRequest"));
+            int daysRequest =  parseInt(request.getParameter("daysRequest"));
+            int workingDays = DateUtil.GetWorkingDays(dateRequest,daysRequest);
+            return String.format("%.2f",(averageSalary/AVERAGE_MONTH_DAYS_IN_YEAR) * workingDays);
         }
         catch (Exception e){
             return e.getMessage();
