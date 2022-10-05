@@ -3,11 +3,11 @@ package com.example.demo.utils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
-import static com.example.demo.utils.ServiceUtil.getDaysWithoutHolidays;
+import static com.example.demo.utils.DateUtil.getDaysWithoutHolidays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class ServiceUtilTest {
+public class DateUtilTest {
     @Test
     void contextLoads1(){
         LocalDate startDate = LocalDate.parse("2022-10-04");

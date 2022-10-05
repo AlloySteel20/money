@@ -5,9 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ServiceUtil {
+public class DateUtil {
 
-    static final double AVERAGE_DAYS_IN_MONTH = 29.3;
     static final String[] holidays = {"01.01", "01.02", "01.03", "01.04", "01.05", "01.06", "01.07", "01.08", "02.23", "03.08", "05.01", "05.09", "06.12", "11.04"};
 
     public static int getDaysWithoutHolidays(LocalDate startDate, int range) throws RuntimeException {
@@ -40,10 +39,6 @@ public class ServiceUtil {
         }
         return false;
 
-    }
-
-    public static String getHolidayPayment(double averageSalary, LocalDate startDay, int daysRequest) {
-        return String.format("%.2f", (averageSalary / AVERAGE_DAYS_IN_MONTH) * getDaysWithoutHolidays(startDay, daysRequest));
     }
 
 }
