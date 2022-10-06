@@ -28,11 +28,14 @@ public class VacationPayment {
     }
 
     public String getSum() {
+        if (startDate == null){
+            return getSumWithoutHolidays();
+        }
         int vacationDays = DateUtil.getDaysWithoutHolidays(startDate, daysRequest);
         return String.format("%.2f", (averageSalary / AVERAGE_DAYS_IN_MONTH) * vacationDays);
     }
 
-    public String getSumWithoutHolidays() {
+    private String getSumWithoutHolidays() {
         return String.format("%.2f", (averageSalary / AVERAGE_DAYS_IN_MONTH) * daysRequest);
     }
 

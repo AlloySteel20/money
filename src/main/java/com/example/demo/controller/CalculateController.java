@@ -18,24 +18,14 @@ import java.time.LocalDate;
 public class CalculateController {
 
 
-    @RequestMapping(value = {"/calculate"}, params = {"averageSalary", "startDate", "daysRequest"})
+    @GetMapping("/calculate")
     public ResponseEntity<String> calculate(@RequestParam("averageSalary") @NotNull @Min(1) double averageSalary,
-                                            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                                            @NotNull LocalDate startDate,
+                                            @RequestParam(value = "startDate", required = false)
+                                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                             @RequestParam("daysRequest") @NotNull @Min(1) int daysRequest
     ) {
         var vacationPayment = new VacationPayment(averageSalary, startDate, daysRequest);
         String response = new JSONObject().put("VacationMoney", vacationPayment.getSum()).toString();
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
-    }
-
-
-    @RequestMapping(value = {"/calculate"}, params = {"averageSalary", "daysRequest"})
-    public ResponseEntity<String> calculate(@RequestParam("averageSalary") @NotNull @Min(1) double averageSalary,
-                                            @RequestParam("daysRequest") @NotNull @Min(1) int daysRequest
-    ) {
-        var vacationPayment = new VacationPayment(averageSalary, null, daysRequest);
-        String response = new JSONObject().put("VacationMoney", vacationPayment.getSumWithoutHolidays()).toString();
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
     }
 
