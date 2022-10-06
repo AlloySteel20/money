@@ -36,12 +36,7 @@ public class CalculateController {
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleRuntimeError(final Exception e) {
-        return getErrorResponse(e.getMessage());
-
-    }
-
-    private ResponseEntity<ErrorResponse> getErrorResponse(String errorMessage) {
-        var responseError = new ErrorResponse(errorMessage);
+        var responseError = new ErrorResponse(e.getMessage());
         return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(responseError);
     }
 

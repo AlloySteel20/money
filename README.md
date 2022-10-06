@@ -1,4 +1,4 @@
-# HolidayPayService
+# VacationPayService
 Тестовое задание
 Приложение "Калькулятор отпускных".
 Микросервис на SpringBoot + Java 11 c одним API:
@@ -13,13 +13,21 @@ GET "/calculate"
 
 Проверяться будет чистота кода, структура проекта, название полей\классов, правильность использования паттернов. Желательно написание юнит-тестов, проверяющих расчет.
 ## Getting started
+``` shell
 ./mvnw spring-boot:run
+```
 ## Request parameters
-1. averageSalary - средняя месячная за год;
-2. startDate - с какого дня отпуск;
-3. daysRequest - на сколько дней работник собрался в отпуск;
+
+1. `averageSalary` - средняя месячная за год;
+2. `daysRequest` - на сколько дней работник собрался в отпуск;
+3. `startDate` - с какого дня отпуск (опциональный параметр/не является обязательным);
+
 ## Request example
-1. Без даты начала:
+
+1. Без даты начала:  
+
 http://localhost:8080/calculate?averageSalary=100000&daysRequest=14
-2. С датой начала(учет праздников):
-http://localhost:8080/calculate?averageSalary=100000&startDate=2022-10-04&daysRequest=14
+
+2. С датой начала(учет праздников):  
+
+http://localhost:8080/calculate?averageSalary=100000&daysRequest=14&startDate=2022-10-04
