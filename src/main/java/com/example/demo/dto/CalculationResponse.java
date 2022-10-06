@@ -2,18 +2,18 @@ package com.example.demo.dto;
 
 import java.util.Objects;
 
-public class CalculationResponseDto {
-    private String vacationMoney;
+public class CalculationResponse {
+    private double vacationMoney;
 
-    public CalculationResponseDto(String vacationMoney) {
+    public CalculationResponse(double vacationMoney) {
         this.vacationMoney = vacationMoney;
     }
 
-    public void setVacationMoney(String vacationMoney) {
+    public void setVacationMoney(double vacationMoney) {
         this.vacationMoney = vacationMoney;
     }
 
-    public String getVacationMoney() {
+    public double getVacationMoney() {
         return vacationMoney;
     }
 
@@ -21,8 +21,8 @@ public class CalculationResponseDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CalculationResponseDto that = (CalculationResponseDto) o;
-        return vacationMoney.equals(that.vacationMoney);
+        CalculationResponse that = (CalculationResponse) o;
+        return Double.compare(that.vacationMoney, vacationMoney) == 0;
     }
 
     @Override

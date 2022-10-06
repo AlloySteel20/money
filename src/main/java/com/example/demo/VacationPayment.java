@@ -12,6 +12,7 @@ public class VacationPayment {
     private final double averageSalary;
     private final LocalDate startDate;
     private final int daysRequest;
+    private final double scale = Math.pow(10, 2);
 
     public VacationPayment(double averageSalary, LocalDate startDate, int daysRequest) {
         this.averageSalary = averageSalary;
@@ -27,16 +28,16 @@ public class VacationPayment {
         return daysRequest;
     }
 
-    public String getSum() {
-        if (startDate == null){
+    public double getSum() {
+        if (startDate == null) {
             return getSumWithoutHolidays();
         }
         int vacationDays = DateUtil.getDaysWithoutHolidays(startDate, daysRequest);
-        return String.format("%.2f", (averageSalary / AVERAGE_DAYS_IN_MONTH) * vacationDays);
+        return Math.ceil(((averageSalary / AVERAGE_DAYS_IN_MONTH) * vacationDays) * scale) / scale;
     }
 
-    private String getSumWithoutHolidays() {
-        return String.format("%.2f", (averageSalary / AVERAGE_DAYS_IN_MONTH) * daysRequest);
+    private double getSumWithoutHolidays() {
+        return Math.ceil(((averageSalary / AVERAGE_DAYS_IN_MONTH) * daysRequest) * scale) / scale;
     }
 
     @Override

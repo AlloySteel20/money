@@ -2,10 +2,10 @@ package com.example.demo.dto;
 
 import java.util.Objects;
 
-public class ResponseError {
+public class ErrorResponse {
     private String error;
 
-    public ResponseError(String error) {
+    public ErrorResponse(String error) {
         this.error = error;
     }
 
@@ -21,7 +21,7 @@ public class ResponseError {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ResponseError that = (ResponseError) o;
+        ErrorResponse that = (ErrorResponse) o;
         return error.equals(that.error);
     }
 

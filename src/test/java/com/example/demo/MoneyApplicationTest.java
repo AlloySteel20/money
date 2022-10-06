@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,34 @@ public class MoneyApplicationTest {
     private MockMvc mockMvc;
 
     @Test
+    @DisplayName("Should return calculation result for requesting parameters")
     public void shouldReturnMessage1() throws Exception {
-        this.mockMvc.perform(get("/calculate?averageSalary=100000&startDate=2022-10-04&daysRequest=14")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("47781,57")));
+        this.mockMvc.perform(get("/calculate?averageSalary=100000&startDate=2022-10-04&daysRequest=14"))
+                    .andDo(print())
+                    .andExpect(status()
+                    .isOk())
+                    .andExpect(content()
+                    .string(containsString("{\"vacationMoney\":47781.57}")));
     }
     @Test
+    @DisplayName("Should return daysRequest parameter must be greater than or equal to 1")
     public void shouldReturnMessage2() throws Exception {
-        this.mockMvc.perform(get("/calculate?averageSalary=100000&startDate=2022-10-04&daysRequest=0")).andDo(print()).andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("{\"error\":\"calculate.daysRequest: must be greater than or equal to 1\"}")));
+        this.mockMvc.perform(get("/calculate?averageSalary=100000&startDate=2022-10-04&daysRequest=0"))
+                    .andDo(print())
+                    .andExpect(status()
+                    .isBadRequest())
+                    .andExpect(content()
+                    .string(containsString("{\"error\":\"calculate.daysRequest: must be greater than or equal to 1\"}")));
     }
     @Test
+    @DisplayName("Should return averageSalary parameter must be greater than or equal to 1")
     public void shouldReturnMessage3() throws Exception {
-        this.mockMvc.perform(get("/calculate?averageSalary=0&startDate=2022-10-04&daysRequest=14")).andDo(print()).andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("{\"error\":\"calculate.averageSalary: must be greater than or equal to 1\"}")));
+        this.mockMvc.perform(get("/calculate?averageSalary=0&startDate=2022-10-04&daysRequest=14"))
+                    .andDo(print())
+                    .andExpect(status()
+                    .isBadRequest())
+                    .andExpect(content()
+                    .string(containsString("{\"error\":\"calculate.averageSalary: must be greater than or equal to 1\"}")));
     }
 }
 

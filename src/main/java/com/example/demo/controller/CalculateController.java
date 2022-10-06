@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.VacationPayment;
-import com.example.demo.dto.CalculationResponseDto;
-import com.example.demo.dto.ResponseError;
+import com.example.demo.dto.CalculationResponse;
+import com.example.demo.dto.ErrorResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,29 +23,25 @@ public class CalculateController {
 
 
     @GetMapping("/calculate")
-    public ResponseEntity<CalculationResponseDto> calculate(@RequestParam("averageSalary") @NotNull @Min(1) double averageSalary,
-                                                            @RequestParam(value = "startDate", required = false)
-                                                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                                            @RequestParam("daysRequest") @NotNull @Min(1) int daysRequest
+    public ResponseEntity<CalculationResponse> calculate(
+        @RequestParam("averageSalary") @NotNull @Min(1) double averageSalary,
+        @RequestParam(value = "startDate", required = false)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+        @RequestParam("daysRequest") @NotNull @Min(1) int daysRequest
     ) {
         var vacationPayment = new VacationPayment(averageSalary, startDate, daysRequest);
-        var calculationResponseDto = new CalculationResponseDto(vacationPayment.getSum());
+        var calculationResponseDto = new CalculationResponse(vacationPayment.getSum());
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(calculationResponseDto);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    protected ResponseEntity<ResponseError> handleRuntimeError(final RuntimeException e) {
-        return handler(e.getMessage());
-    }
-
     @ExceptionHandler(Exception.class)
-    protected ResponseEntity<ResponseError> handleRuntimeError(final Exception e) {
-        return handler(e.getMessage());
+    protected ResponseEntity<ErrorResponse> handleRuntimeError(final Exception e) {
+        return getErrorResponse(e.getMessage());
 
     }
 
-    private ResponseEntity<ResponseError> handler(String errorMessage) {
-        var responseError = new ResponseError(errorMessage);
+    private ResponseEntity<ErrorResponse> getErrorResponse(String errorMessage) {
+        var responseError = new ErrorResponse(errorMessage);
         return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(responseError);
     }
 

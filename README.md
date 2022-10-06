@@ -13,10 +13,13 @@ GET "/calculate"
 
 Проверяться будет чистота кода, структура проекта, название полей\классов, правильность использования паттернов. Желательно написание юнит-тестов, проверяющих расчет.
 ## Getting started
-Run MoneyApplication.main()
+./mvnw spring-boot:run
 ## Request parameters
 1. averageSalary - средняя месячная за год;
 2. startDate - с какого дня отпуск;
 3. daysRequest - на сколько дней работник собрался в отпуск;
 ## Request example
+1. Без даты начала:
+http://localhost:8080/calculate?averageSalary=100000&daysRequest=14
+2. С датой начала(учет праздников):
 http://localhost:8080/calculate?averageSalary=100000&startDate=2022-10-04&daysRequest=14
