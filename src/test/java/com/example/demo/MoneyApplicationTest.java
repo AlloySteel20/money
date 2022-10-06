@@ -29,12 +29,12 @@ public class MoneyApplicationTest {
     @Test
     public void shouldReturnMessage2() throws Exception {
         this.mockMvc.perform(get("/calculate?averageSalary=100000&startDate=2022-10-04&daysRequest=0")).andDo(print()).andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("{\"Error:\":\"calculate.daysRequest: must be greater than or equal to 2\"}")));
+                .andExpect(content().string(containsString("{\"error\":\"calculate.daysRequest: must be greater than or equal to 1\"}")));
     }
     @Test
     public void shouldReturnMessage3() throws Exception {
         this.mockMvc.perform(get("/calculate?averageSalary=0&startDate=2022-10-04&daysRequest=14")).andDo(print()).andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("{\"Error:\":\"calculate.averageSalary: must be greater than or equal to 1\"}")));
+                .andExpect(content().string(containsString("{\"error\":\"calculate.averageSalary: must be greater than or equal to 1\"}")));
     }
 }
 

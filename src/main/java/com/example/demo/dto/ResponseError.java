@@ -3,10 +3,18 @@ package com.example.demo.dto;
 import java.util.Objects;
 
 public class ResponseError {
-    private final String error;
+    private String error;
 
     public ResponseError(String error) {
         this.error = error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getError() {
+        return error;
     }
 
     @Override
