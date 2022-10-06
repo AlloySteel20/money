@@ -28,7 +28,12 @@ public class VacationPayment {
     }
 
     public String getSum() {
-        return String.format("%.2f", (averageSalary / AVERAGE_DAYS_IN_MONTH) * DateUtil.getDaysWithoutHolidays(startDate, daysRequest));
+        int vacationDays = DateUtil.getDaysWithoutHolidays(startDate, daysRequest);
+        return String.format("%.2f", (averageSalary / AVERAGE_DAYS_IN_MONTH) * vacationDays);
+    }
+
+    public String getSumWithoutHolidays() {
+        return String.format("%.2f", (averageSalary / AVERAGE_DAYS_IN_MONTH) * daysRequest);
     }
 
     @Override
@@ -45,7 +50,9 @@ public class VacationPayment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VacationPayment that = (VacationPayment) o;
-        return Double.compare(that.averageSalary, averageSalary) == 0 && daysRequest == that.daysRequest && startDate.equals(that.startDate);
+        return Double.compare(that.averageSalary, averageSalary) == 0
+                && daysRequest == that.daysRequest
+                && startDate.equals(that.startDate);
     }
 
     @Override
