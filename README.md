@@ -16,7 +16,7 @@ GET "/calculate"
 Run MoneyApplication.main()
 ## Request parameters
 1. averageSalary - средняя месячная за год;
-2. startDay - с какого дня отпуск;
+2. startDate - с какого дня отпуск;
 3. daysRequest - на сколько дней работник собрался в отпуск;
 ## Request example
-http://localhost:8080/calculate?averageSalary=100000&startDay=2022-10-04&daysRequest=14
+http://localhost:8080/calculate?averageSalary=100000&startDate=2022-10-04&daysRequest=14
