@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.utils.DateUtil;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -12,7 +14,6 @@ public class VacationPayment {
     private final double averageSalary;
     private final LocalDate startDate;
     private final int daysRequest;
-    private final double scale = Math.pow(10, 2);
 
     public VacationPayment(double averageSalary, LocalDate startDate, int daysRequest) {
         this.averageSalary = averageSalary;
@@ -28,16 +29,21 @@ public class VacationPayment {
         return daysRequest;
     }
 
-    public double getSum() {
+    public BigDecimal getSum() {
         if (startDate == null) {
-            return getSumWithoutHolidays();
+            return doubleRound(getSumWithoutHolidays());
         }
         int vacationDays = DateUtil.getDaysWithoutHolidays(startDate, daysRequest);
-        return Math.ceil(((averageSalary / AVERAGE_DAYS_IN_MONTH) * vacationDays) * scale) / scale;
+        double vacationMoney = (averageSalary / AVERAGE_DAYS_IN_MONTH) * vacationDays;
+        return doubleRound(vacationMoney);
     }
 
     private double getSumWithoutHolidays() {
-        return Math.ceil(((averageSalary / AVERAGE_DAYS_IN_MONTH) * daysRequest) * scale) / scale;
+        return (averageSalary / AVERAGE_DAYS_IN_MONTH) * daysRequest;
+    }
+
+    private BigDecimal doubleRound(double vacationMoney) {
+        return (BigDecimal.valueOf(vacationMoney)).setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override

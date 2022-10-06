@@ -1,19 +1,20 @@
 package com.example.demo.dto;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class CalculationResponse {
-    private double vacationMoney;
+    private BigDecimal vacationMoney;
 
-    public CalculationResponse(double vacationMoney) {
+    public CalculationResponse(BigDecimal vacationMoney) {
         this.vacationMoney = vacationMoney;
     }
 
-    public void setVacationMoney(double vacationMoney) {
+    public void setVacationMoney(BigDecimal vacationMoney) {
         this.vacationMoney = vacationMoney;
     }
 
-    public double getVacationMoney() {
+    public BigDecimal getVacationMoney() {
         return vacationMoney;
     }
 
@@ -22,7 +23,7 @@ public class CalculationResponse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CalculationResponse that = (CalculationResponse) o;
-        return Double.compare(that.vacationMoney, vacationMoney) == 0;
+        return vacationMoney.equals(that.vacationMoney);
     }
 
     @Override
