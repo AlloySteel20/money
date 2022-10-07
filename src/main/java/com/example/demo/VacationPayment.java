@@ -31,18 +31,18 @@ public class VacationPayment {
 
     public BigDecimal getSum() {
         if (startDate == null) {
-            return doubleRound(getSumWithoutHolidays());
+            return roundToPenny(getSumWithoutHolidays());
         }
         int vacationDays = DateUtil.getDaysWithoutHolidays(startDate, daysRequest);
         double vacationMoney = (averageSalary / AVERAGE_DAYS_IN_MONTH) * vacationDays;
-        return doubleRound(vacationMoney);
+        return roundToPenny(vacationMoney);
     }
 
     private double getSumWithoutHolidays() {
         return (averageSalary / AVERAGE_DAYS_IN_MONTH) * daysRequest;
     }
 
-    private BigDecimal doubleRound(double vacationMoney) {
+    private BigDecimal roundToPenny(double vacationMoney) {
         return (BigDecimal.valueOf(vacationMoney)).setScale(2, RoundingMode.HALF_UP);
     }
 
